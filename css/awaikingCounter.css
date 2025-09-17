@@ -83,10 +83,31 @@
 
 .quick-access h3 { margin-top:1rem; font-size:1.1rem; color:#333; border-bottom:1px solid #ddd; padding-bottom:0.3rem; }
 .quick-btn {
-  display:block; width:95%; margin:0.3rem 0; padding:0.5rem; text-align:left;
-  background:#ecf5ff; border:1px solid #ccc; border-radius:6px; cursor:pointer; font-size:0.9rem;
+  display:block;
+  width:95%;
+  margin:0.3rem 0;
+  padding:0.5rem;
+  text-align:left;
+  background:#ecf5ff;
+  border:1px solid #ccc;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:0.9rem;
+  color: #003366;
+  padding-left: 44px; /* ←画像の幅よりちょい大きめに */
+  
+  /* 背景画像系 */
+  background-size: auto 100%;  /* 高さをボタンに合わせる（縦基準） */
+  background-repeat: no-repeat;
+  background-position: left center;
 }
-.quick-btn:hover { background:#dceeff; }
+.quick-btn:hover { 
+    color: #003366;
+    background:#dceeff; 
+    background-size: auto 100%;  /* 高さをボタンに合わせる（縦基準） */
+    background-repeat: no-repeat;
+    background-position: left center;
+}
 
 /* スクロールバー */
 .quick-access::-webkit-scrollbar { width:8px; }

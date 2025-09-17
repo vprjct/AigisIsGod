@@ -66,6 +66,7 @@ function renderQuickButtons(filter=""){
         const b=document.createElement("button");
         b.className="quick-btn";
         b.textContent=btn.name;
+        b.style.backgroundImage = `url('../icon/${btn.name}.png')`;
         b.onclick=()=>quickAdd(btn.add);
         buttonsContainer.appendChild(b);
       }
@@ -97,3 +98,5 @@ tabbutton.addEventListener('click', () => {
 
 // 初回描画
 renderQuickButtons();
+// 初回📌固定
+lists.classList.toggle('fixed');
