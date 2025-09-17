@@ -1,0 +1,33 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin:0; padding:0; background:#f9f9fc; color:#333;
+}
+header {
+  text-align:center; padding:1rem; background:#4a90e2; color:#fff;
+  font-size:1.5rem; font-weight:bold; box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+.container { padding:1rem; max-width:1200px; margin:0 auto; }
+
+h2 { margin-top:2rem; font-size:1.2rem; color:#4a90e2; border-bottom:2px solid #ddd; padding-bottom:0.3rem; }
+
+
+#aa-bg {
+    font-size:12pt;
+    font-family:"ＭＳ Ｐゴシック";
+    line-height:normal;
+    white-space: pre; /* 改行・スペースを保持 */
+    position: fixed;           /* 画面に固定 */
+    bottom: 20px;              /* 右下からの距離 */
+    right: 50px;
+    white-space: pre;          /* 改行・スペースを保持 */
+    font-size: 12pt;
+    line-height: normal;
+    color: rgba(0,0,0,0.2);   /* 薄くして背景感 */
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;          /* 前景コンテンツ */
+    padding: 2rem;
+}

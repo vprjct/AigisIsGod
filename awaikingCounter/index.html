@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>覚醒素材メモ帳</title>
+<!-- 共通 -->
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/script.js" defer></script>
+<!-- 個別 -->
+<link rel="stylesheet" href="../css/awaikingCounter.css">
+<script src="../js/awaikingCounterData.js"></script>
+<script src="../js/awaikingCounter.js" defer></script>
+</head>
+<body>
+<header>覚醒素材必要数のメモ帳</header>
+<div class="container">
+  <button class="reset-btn" onclick="resetAll()">リセット</button>
+
+  <h2>近接</h2>
+  <div class="category" id="近接"></div>
+
+  <h2>遠距離</h2>
+  <div class="category" id="遠距離"></div>
+
+  <h2>遠近距離</h2>
+  <div class="category" id="遠近距離"></div>
+</div>
+
+<div class="quick-tab">📌</div>
+<div class="quick-access">
+  <h3>覚醒クラスから自動入力</h3>
+  <input type="text" id="quick-filter" placeholder="検索...">
+  <div id="quick-buttons"></div>
+</div>
+
+<div id="aa-bg"></div>
+
+</body>
+</html>
