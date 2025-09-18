@@ -14,7 +14,11 @@
 <body>
 <header>覚醒素材必要数のメモ帳</header>
 <div class="container">
-  <button class="reset-btn" onclick="resetAll()">リセット</button>
+
+  <div class="container-buttons">
+    <button id="hide-zero-btn" class="container-btn">1体以上のみ表示</button>
+    <button id="reset-btn" class="container-btn" onclick="resetAll()">初期化</button>
+  </div>
 
   <h2>近接</h2>
   <div class="category" id="近接"></div>

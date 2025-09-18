@@ -11,6 +11,7 @@ for(const cat in listData){
     const div=document.createElement("div");
     div.className="item";
     div.style.backgroundImage = `url('../icon/awaikingCounter/${name}.png')`;
+    div.dataset.count = 0;
     const lbl=document.createElement("div");
     lbl.className="label";
     if(name==="ヴァンパイアハンター") lbl.classList.add("vampire-hunter");
@@ -43,10 +44,13 @@ for(const cat in listData){
 
 // 更新ボタン状態
 function updateButtons(name){
-  const div=document.getElementById(name).parentNode.querySelector(".controls");
-  const count=counts[name];
-  div.querySelectorAll("button")[1].disabled=count===0;
-  div.querySelector(".count").textContent=count;
+    console.log(name);
+    const parentNode = document.getElementById(name).parentNode;
+    const div=parentNode.querySelector(".controls");
+    const count=counts[name];
+    div.querySelectorAll("button")[1].disabled=count===0;
+    div.querySelector(".count").textContent=count;
+    parentNode.dataset.count = count;
 }
 
 // リセット
@@ -149,6 +153,40 @@ document.addEventListener("DOMContentLoaded", () => {
             headLinks.scrollTop = 0;
         });
     });
+
+    
+    const hideZeroBtn = document.getElementById("hide-zero-btn");
+    const container = document.querySelector(".container"); // containerのクラス
+    let hideZero = false;
+
+    hideZeroBtn.addEventListener("click", () => {
+        hideZero = !hideZero;
+        if (hideZero)
+        {
+            hideZeroBtn.textContent = "全件表示に戻す";
+        }
+        else
+        {
+            hideZeroBtn.textContent = "1体以上のみ表示";
+        }
+        hideZeroBtn.classList.toggle("active", hideZero); // activeクラスで押した感出す
+        filterZero();
+    });
+
+    function filterZero() {
+        const items = container.querySelectorAll(".item"); // itemのクラス
+        console.log(items);
+        items.forEach(item => {
+            // item.controls.count が 0 かどうか
+            const count = parseInt(item.dataset.count); // 仮に data-count に count を入れてる場合
+            console.log(count);
+            if (hideZero && count <= 0) {
+                item.style.display = "none";
+            } else {
+                item.style.display = "";
+            }
+        });
+    }
 
     // 初期描画
     createHeaderLinks();
