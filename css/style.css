@@ -38,11 +38,10 @@ h2 { margin-top:2rem; font-size:1.2rem; color:#4a90e2; border-bottom:2px solid #
     background-color: #333; /* 黒色の背景 */
     color: white; /* 文字を白に */
     text-align: center;
-    position: relative;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
-
 
 .footer a {
     color: #b0e3b0; /* 淡いブルー */
