@@ -27,6 +27,11 @@ for(const cat in listData){
     const cnt=document.createElement("div");
     cnt.className="count";
     cnt.textContent=0;
+
+    // 初期状態で押せない場合はdisabledに
+    const totalValue = Object.values(cnt.textContent).reduce((a, v) => a + v, 0);
+    if(totalValue <= 0) btnDown.disabled = true;
+                
     controls.appendChild(btnUp);
     controls.appendChild(cnt);
     controls.appendChild(btnDown);
@@ -153,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ヘッダリンク生成
 function createHeaderLinks() {
     headLinks.textContent = "";
-    const headLinkList = sortType ? ["近接", "遠距離", "遠近距離"] : Object.keys(kanaMap);
+    const headLinkList = sortType ? classList : Object.keys(kanaMap);
     headLinkList.forEach((cat, index) => {
         const a = document.createElement("a");
         a.href = `#cat-${cat}`;
