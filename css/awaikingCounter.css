@@ -61,8 +61,18 @@
     background-repeat: no-repeat;
     background-position: 4px center;
 }
-#遠距離 .item { background:#e9f9f0; border-left:6px solid #27ae60; }
-#遠近距離 .item { background:#f4ecff; border-left:6px solid #9b59b6; }
+#遠距離 .item { background:#e9f9f0; border-left:6px solid #27ae60;
+    /* 背景画像系 */
+    background-size: auto 70%;  /* 高さをボタンに合わせる（縦基準） */
+    background-repeat: no-repeat;
+    background-position: 4px center;
+}
+#遠近距離 .item { background:#f4ecff; border-left:6px solid #9b59b6;
+    /* 背景画像系 */
+    background-size: auto 70%;  /* 高さをボタンに合わせる（縦基準） */
+    background-repeat: no-repeat;
+    background-position: 4px center;
+}
 
 /* サイドバー */
 .quick-access {
