@@ -51,6 +51,8 @@ function updateButtons(name){
     div.querySelectorAll("button")[1].disabled=count===0;
     div.querySelector(".count").textContent=count;
     parentNode.dataset.count = count;
+
+    filterZero();
 }
 
 // リセット
@@ -154,44 +156,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    
-    const hideZeroBtn = document.getElementById("hide-zero-btn");
-    const container = document.querySelector(".container"); // containerのクラス
-    let hideZero = false;
-
-    hideZeroBtn.addEventListener("click", () => {
-        hideZero = !hideZero;
-        if (hideZero)
-        {
-            hideZeroBtn.textContent = "全件表示に戻す";
-        }
-        else
-        {
-            hideZeroBtn.textContent = "1体以上のみ表示";
-        }
-        hideZeroBtn.classList.toggle("active", hideZero); // activeクラスで押した感出す
-        filterZero();
-    });
-
-    function filterZero() {
-        const items = container.querySelectorAll(".item"); // itemのクラス
-        console.log(items);
-        items.forEach(item => {
-            // item.controls.count が 0 かどうか
-            const count = parseInt(item.dataset.count); // 仮に data-count に count を入れてる場合
-            console.log(count);
-            if (hideZero && count <= 0) {
-                item.style.display = "none";
-            } else {
-                item.style.display = "";
-            }
-        });
-    }
-
     // 初期描画
     createHeaderLinks();
     renderQuickButtons(currentFilter);
 });
+
+const hideZeroBtn = document.getElementById("hide-zero-btn");
+let hideZero = false;
+
+hideZeroBtn.addEventListener("click", () => {
+    hideZero = !hideZero;
+    if (hideZero)
+    {
+        hideZeroBtn.textContent = "全件表示に戻す";
+    }
+    else
+    {
+        hideZeroBtn.textContent = "1体以上のみ表示";
+    }
+    hideZeroBtn.classList.toggle("active", hideZero); // activeクラスで押した感出す
+    filterZero();
+});
+
+function filterZero() {
+    const container = document.querySelector(".container"); // containerのクラス
+    const items = container.querySelectorAll(".item"); // itemのクラス
+    console.log(items);
+    items.forEach(item => {
+        // item.controls.count が 0 かどうか
+        const count = parseInt(item.dataset.count); // 仮に data-count に count を入れてる場合
+        console.log(count);
+        if (hideZero && count <= 0) {
+            item.style.display = "none";
+        } else {
+            item.style.display = "";
+        }
+    });
+}
 
 // ヘッダリンク生成
 function createHeaderLinks() {
