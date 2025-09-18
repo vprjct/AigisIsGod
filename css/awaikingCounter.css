@@ -1,16 +1,18 @@
+.container { margin-bottom: 50px; }
+
 .reset-btn {
   display:inline-block; margin:1rem 0; padding:0.5rem 1rem;
   font-size:1rem; background:#e74c3c; color:#fff; border:none; border-radius:6px;
   cursor:pointer; text-align:center;
 }
 .reset-btn:hover { background:#c0392b; }
-.category { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1rem; }
+.category { display:flex; flex-wrap:wrap; gap:0.8rem 1rem; margin-top:1rem; }
 .item {
-  flex:0 0 250px; background:#fff; padding:0.8rem; border-radius:10px;
+  flex:0 0 250px; background:#fff; padding:0.65rem 0.7rem; border-radius:10px;
   box-shadow:0 2px 5px rgba(0,0,0,0.1); display:flex; justify-content:space-between; align-items:center;
 }
-.item .label { width:120px; font-size:1em; font-weight:bold; white-space:nowrap; text-align:left; }
-.item .label.vampire-hunter { font-size:0.85em; } /* 文字小さく */
+.item .label { width:120px; font-size:0.9em; font-weight:bold; white-space:nowrap; text-align:left; padding-left: 33px; /* ←画像の幅よりちょい大きめに */ }
+.item .label.vampire-hunter { font-size:0.75em; } /* 文字小さく */
 .controls { display:flex; align-items:center; gap:0.3rem; flex-shrink:0; }
 .controls button {
   padding:0.3rem 0.6rem; border:none; border-radius:5px; cursor:pointer;
@@ -20,7 +22,12 @@
 .count { min-width:2rem; text-align:center; font-weight:bold; }
 
 /* カテゴリ色分け */
-#近接 .item { background:#e8f3ff; border-left:6px solid #4a90e2; }
+#近接 .item { background:#e8f3ff; border-left:6px solid #4a90e2;
+    /* 背景画像系 */
+    background-size: auto 70%;  /* 高さをボタンに合わせる（縦基準） */
+    background-repeat: no-repeat;
+    background-position: 4px center;
+}
 #遠距離 .item { background:#e9f9f0; border-left:6px solid #27ae60; }
 #遠近距離 .item { background:#f4ecff; border-left:6px solid #9b59b6; }
 
@@ -81,7 +88,14 @@
   overflow-y:auto;
 }
 
-.quick-access h3 { margin-top:1rem; font-size:1.1rem; color:#333; border-bottom:1px solid #ddd; padding-bottom:0.3rem; }
+.quick-access h3 {
+    margin-top:1rem;
+    margin-bottom:0.5rem;
+    font-size:1.1rem; 
+    color:#333; 
+    border-bottom:1px solid #ddd;
+    padding-bottom:0.3rem;
+}
 .quick-btn {
   display:block;
   width:95%;
@@ -94,6 +108,8 @@
   cursor:pointer;
   font-size:0.9rem;
   color: #003366;
+  text-shadow: 1px 1px 0 #fff;
+  font-weight: bold;
   padding-left: 44px; /* ←画像の幅よりちょい大きめに */
   
   /* 背景画像系 */
@@ -115,3 +131,59 @@
 .quick-access::-webkit-scrollbar-thumb { background:#4a90e2; border-radius:4px; }
 .quick-access::-webkit-scrollbar-thumb:hover { background:#357ABD; }
 .quick-access { scrollbar-width: thin; scrollbar-color: #4a90e2 #f1f1f1; }
+
+/* ヘッダリンク全体 */
+#head-links a {
+    color: #1e90ff;        /* 青系 */
+    text-decoration: none;  /* 下線なし */
+    padding: 0 0.2rem; /* 左右の間隔 */
+    margin-bottom: 2px; /* 下に2pxの隙間 */
+    display: inline-block; /* margin-bottom を効かせるために必要 */
+    transition: color 0.2s; /* ホバー時の色変化 */
+}
+
+/* ホバー時 */
+#head-links a:hover {
+    color: #63b3ed; /* 明るめの青に */
+}
+
+
+/* active クラスが付いたリンク */
+#head-links a.active {
+    color: #0d47a1; /* 濃い青で強調 */
+    font-weight: bold;
+}
+
+
+/* 共通部分 */
+.sort-types {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 1rem;
+  font-family: sans-serif;
+}
+
+.sort-types a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.sort-types a:hover {
+  background: #f0f0f0;
+  color: #222;
+  border-color: #ccc;
+}
+
+.sort-types a.active {
+  background: #4a90e2;
+  color: #fff;
+  border-color: #4a90e2;
+}

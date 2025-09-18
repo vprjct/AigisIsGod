@@ -31,3 +31,41 @@ h2 { margin-top:2rem; font-size:1.2rem; color:#4a90e2; border-bottom:2px solid #
     z-index: 1;          /* 前景コンテンツ */
     padding: 2rem;
 }
+
+
+/* フッターの全体的なスタイル */
+.footer {
+    background-color: #333; /* 黒色の背景 */
+    color: white; /* 文字を白に */
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.footer a {
+    color: #b0e3b0; /* 淡いブルー */
+    text-decoration: none; /* 下線を消す */
+    font-weight: bold; /* 文字を太字にして目立たせる */
+    transition: color 0.3s ease, transform 0.3s ease; /* ホバー時のエフェクト */
+}
+
+/* フッター内のリンク（ホバー時） */
+.footer a:hover {
+    color: #ff6347; /* オレンジ色 */
+    transform: translateY(-3px); /* 少し上に動かす */
+}
+
+/* フッター内のコンテンツ */
+.footer-content {
+    max-width: 1200px; /* 最大幅 */
+    margin: 0 auto;
+}
+
+/* フッターのテキストスタイル */
+.footer p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+}
