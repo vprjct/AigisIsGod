@@ -58,6 +58,8 @@ function updateButtons(name){
 function resetAll(){
   for(const name in counts) counts[name]=0;
   for(const name in counts) updateButtons(name);
+  for (const key in selectCounts) delete selectCounts[key];
+  renderCounts();
 }
 
 // サイドバー生成＋フィルタ
@@ -279,16 +281,12 @@ const display = document.getElementById("count-display");
 function renderCounts(name) {
     display.innerHTML = "";
 
-        display.innerHTML = "";
-
     const activeJobs = [];
     for (const [category, jobs] of Object.entries(quickData)) {
       jobs.forEach(job => {
         if (selectCounts[job.name]) activeJobs.push({name: job.name, category, add: job.add}); // ←counts → selectCounts
       });
     }
-
-    console.log(activeJobs);
 
     if (activeJobs.length === 0) return;
 
@@ -303,49 +301,9 @@ function renderCounts(name) {
       btn.addEventListener("click", () => {
         selectCounts[name] = Math.max(0, selectCounts[name] - 1); // ←counts → selectCounts
         quickRemove(name, add);
-//        renderCounts();
       });
       display.appendChild(btn);
     });
-
-    /*
-    for (const cnt of Object.values(selectCounts)) {
-        console.log(cnt);
-        if (cnt > 0)
-        {
-            visible = true;
-            break;
-        }
-    }
-    if (!visible)
-    {
-        return;
-    }
-    
-    // タイトル表示
-    const title = document.createElement("h3");
-    title.textContent = "自動入力数(クリックで減算)";
-    display.appendChild(title);
-    // quickData をカテゴリごとに順に回す
-    for (const jobs of Object.values(quickData)) {
-        jobs.forEach(job => {
-            const name = job.name;
-            if (selectCounts[name]) {  // カウントされたものだけ表示
-                const btn = document.createElement("button");
-                btn.textContent = `${name}：${selectCounts[name]}`;
-                btn.classList.add(`category-${category}`); // カテゴリ別クラスを追加
-
-                // 減算処理
-                btn.addEventListener("click", () => {
-                    selectCounts[name] = Math.max(0, selectCounts[name] - 1); // 0未満にはしない
-                    quickRemove(name, job.add);
-                });
-
-                display.appendChild(btn);
-            }
-        });
-    }
-        */
 }
 
 // 初回📌固定
