@@ -230,3 +230,37 @@
   color: #fff;
   border-color: #4a90e2;
 }
+
+
+  /* count-display 内のボタン装飾 */
+  #count-display button {
+    color: #fff;                     /* 文字色 */
+    border: none;                    /* 枠線なし */
+    border-radius: 0.5rem;           /* 角丸 */
+    padding: 0.4rem 0.8rem;          /* 内側の余白 */
+    margin: 0.2rem;                  /* ボタン間の余白 */
+    cursor: pointer;                 /* ホバー時ポインタ */
+    font-weight: bold;
+  }
+
+  #count-display button:hover {
+    transform: scale(1.05);          /* 少し拡大 */
+  }
+
+  /* タイトル装飾 */
+  #count-display h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  
+  /* カテゴリごとの背景色 */
+  .category-近接 { background-color: #4a90e2; }
+  .category-遠距離 { background-color: #50c878; }
+  .category-遠近距離 { background-color: #9b59b6; }
+
+  /* ホバー時の色を少し濃くする */
+  .category-近接:hover { background-color: #357ab8; }
+  .category-遠距離:hover { background-color: #3da35d; }
+  .category-遠近距離:hover { background-color: #7d3f9c; }

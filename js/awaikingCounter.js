@@ -44,7 +44,6 @@ for(const cat in listData){
 
 // 更新ボタン状態
 function updateButtons(name){
-    console.log(name);
     const parentNode = document.getElementById(name).parentNode;
     const div=parentNode.querySelector(".controls");
     const count=counts[name];
@@ -148,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // ヘッダリンク・ボタン描画
             createHeaderLinks();
-            console.log(currentFilter);
             renderQuickButtons(currentFilter);
 
             // タブ切り替え時はヘッダリンクトップにスクロール
@@ -181,11 +179,9 @@ hideZeroBtn.addEventListener("click", () => {
 function filterZero() {
     const container = document.querySelector(".container"); // containerのクラス
     const items = container.querySelectorAll(".item"); // itemのクラス
-    console.log(items);
     items.forEach(item => {
         // item.controls.count が 0 かどうか
         const count = parseInt(item.dataset.count); // 仮に data-count に count を入れてる場合
-        console.log(count);
         if (hideZero && count <= 0) {
             item.style.display = "none";
         } else {
@@ -227,7 +223,7 @@ function renderQuickButtons(filter="") {
                 b.className = "quick-btn";
                 b.textContent = btn.name;
                 b.style.backgroundImage = `url('../icon/${btn.name}.png')`;
-                b.onclick = () => quickAdd(btn.add);
+                b.onclick = () => quickAdd(btn.name, btn.add);
                 buttonsContainer.appendChild(b);
             }
         });
@@ -248,16 +244,108 @@ tabbutton.addEventListener('click', () => {
   tabbutton.classList.toggle('active'); 
 });
 
-
-
 // サイドバーから中央カウンター更新
-function quickAdd(updates){
-  for(const key in updates){
-    if(counts.hasOwnProperty(key)){
-      counts[key]=Math.max(0, counts[key]+updates[key]);
-      updateButtons(key);
+function quickAdd(name, updates){
+    for(const key in updates){
+        if(counts.hasOwnProperty(key)){
+            counts[key]=Math.max(0, counts[key]+updates[key]);
+            updateButtons(key);
+        }
     }
-  }
+    // クラスカウント数更新
+    if (!selectCounts[name]) {
+        selectCounts[name] = 1;
+    }
+    else {
+        selectCounts[name] += 1;
+    }
+    renderCounts(name);
+}
+
+function quickRemove(name, updates){
+    for(const key in updates){
+        if(counts.hasOwnProperty(key)){
+            counts[key]=Math.max(0, counts[key]-updates[key]);
+            updateButtons(key);
+        }
+    }
+    // クラスカウント数更新
+    renderCounts(name);
+}
+
+const selectCounts = {};
+const displayConteiner = document.getElementsByClassName("count-display-conteiner");
+const display = document.getElementById("count-display");
+function renderCounts(name) {
+    display.innerHTML = "";
+
+        display.innerHTML = "";
+
+    const activeJobs = [];
+    for (const [category, jobs] of Object.entries(quickData)) {
+      jobs.forEach(job => {
+        if (selectCounts[job.name]) activeJobs.push({name: job.name, category, add: job.add}); // ←counts → selectCounts
+      });
+    }
+
+    console.log(activeJobs);
+
+    if (activeJobs.length === 0) return;
+
+    const title = document.createElement("h3");
+    title.textContent = "自動入力数(クリックで減算)";
+    display.appendChild(title);
+
+    activeJobs.forEach(({name, category, add}) => {
+      const btn = document.createElement("button");
+      btn.textContent = `${name}：${selectCounts[name]}`; // ←counts → selectCounts
+      btn.classList.add(`category-${category}`);
+      btn.addEventListener("click", () => {
+        selectCounts[name] = Math.max(0, selectCounts[name] - 1); // ←counts → selectCounts
+        quickRemove(name, add);
+//        renderCounts();
+      });
+      display.appendChild(btn);
+    });
+
+    /*
+    for (const cnt of Object.values(selectCounts)) {
+        console.log(cnt);
+        if (cnt > 0)
+        {
+            visible = true;
+            break;
+        }
+    }
+    if (!visible)
+    {
+        return;
+    }
+    
+    // タイトル表示
+    const title = document.createElement("h3");
+    title.textContent = "自動入力数(クリックで減算)";
+    display.appendChild(title);
+    // quickData をカテゴリごとに順に回す
+    for (const jobs of Object.values(quickData)) {
+        jobs.forEach(job => {
+            const name = job.name;
+            if (selectCounts[name]) {  // カウントされたものだけ表示
+                const btn = document.createElement("button");
+                btn.textContent = `${name}：${selectCounts[name]}`;
+                btn.classList.add(`category-${category}`); // カテゴリ別クラスを追加
+
+                // 減算処理
+                btn.addEventListener("click", () => {
+                    selectCounts[name] = Math.max(0, selectCounts[name] - 1); // 0未満にはしない
+                    quickRemove(name, job.add);
+                });
+
+                display.appendChild(btn);
+            }
+        });
+    }
+        */
 }
 
 // 初回📌固定
