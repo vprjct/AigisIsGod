@@ -23,7 +23,7 @@ h2 { margin-top:2rem; font-size:1.2rem; color:#4a90e2; border-bottom:2px solid #
     font-size: 12pt;
     line-height: normal;
     color: rgba(0,0,0,0.2);   /* 薄くして背景感 */
-    z-index: 0;
+    z-index: -1;
 }
 
 .content {
@@ -67,4 +67,5 @@ h2 { margin-top:2rem; font-size:1.2rem; color:#4a90e2; border-bottom:2px solid #
     font-size: 1rem;
     margin-bottom: 10px;
     font-family: 'Arial', sans-serif;
+
 }
