@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>オーブ計算機</title>
+<!-- 共通 -->
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/script.js" defer></script>
+<!-- 個別 -->
+<link rel="stylesheet" href="../css/orbCounter.css">
+<script src="../js/orbCounterData.js"></script>
+<script src="../js/orbCounter.js"></script>
+</head>
+<body>
+<header>オーブ計算機</header>
+<nav class="sub-nav">
+  <a href="https://vprjct.github.io/AigisIsGod/orbCounter/" class="current">
+    オーブ計算機
+  </a>
+  <a href="https://vprjct.github.io/AigisIsGod/awaikingCounter/">
+    覚醒素材メモ帳
+  </a>
+</nav>
+<div class="container content">
+
+<h2>入力</h2>
+
+<table>
+<tr>
+  <th></th>
+  <th>戦</th><th>聖</th><th>射</th>
+  <th>騎</th><th>軽</th><th>魔</th><th>重</th>
+</tr>
+<tr>
+  <th>所持</th>
+  <td><input id="c0" value=""></td>
+  <td><input id="c1" value=""></td>
+  <td><input id="c2" value=""></td>
+  <td><input id="c3" value=""></td>
+  <td><input id="c4" value=""></td>
+  <td><input id="c5" value=""></td>
+  <td><input id="c6" value=""></td>
+</tr>
+<tr>
+  <th>目標</th>
+  <td><input id="g0" value=""></td>
+  <td><input id="g1" value=""></td>
+  <td><input id="g2" value=""></td>
+  <td><input id="g3" value=""></td>
+  <td><input id="g4" value=""></td>
+  <td><input id="g5" value=""></td>
+  <td><input id="g6" value=""></td>
+</tr>
+</table>
+
+<button class="action-btn" onclick="calculateOrb()">計算</button>
+
+<div id="orb-result"></div>
+
+</div>
+
+<div id="loading" class="loading-overlay">
+  <div class="loading-box">
+    <div class="loading-spinner"></div>
+    計算中…
+  </div>
+</div>
+
+<div id="aa-bg"></div>
+
+<footer class="footer">
+    <div class="footer-content">
+        連絡先: <a href="https://github.com/vprjct/aigisisgod">github</a> >>> スペシャルサンクス: chatGPTくん スレ王子 キャリーさん リヴル様ちゃん(かわいい)
+    </div>
+</footer>
+
+</body>
+</html>
