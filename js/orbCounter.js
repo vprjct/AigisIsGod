@@ -18,8 +18,8 @@ function heuristic(state, goal) {
 function solveOrbAuto(start, goal) {
   const maxGoal = Math.max(...goal);
 
-  // 小さいときだけ A*
-  if (maxGoal <= 30) {
+  // 十分小さいときだけ A*
+  if (maxGoal <= 6) {
     return solveOrb(start, goal);
   }
 
@@ -47,7 +47,13 @@ function solveOrb(start, goal) {
   const visited = new Map();
   visited.set(startState.join(","), 0);
 
+  const MAX_EXPAND = 500000;
+  let expanded = 0;
+
   while (open.length) {
+    if (++expanded > MAX_EXPAND) {
+      return null; // 強制打ち切り
+    }
     open.sort((a,b)=>a.f - b.f);
     const current = open.shift();
     const { state, real, counts, g } = current;
@@ -88,28 +94,37 @@ function solveOrb(start, goal) {
 // 貪欲法（近似解）
 // =====================
 function solveOrbGreedy(start, goal) {
+  const ORB_PER_QUEST = 4;
+
   const counts = Object.fromEntries(
     Object.keys(ORB_QUESTS).map(k => [k, 0])
   );
 
   let real = [...start];
 
-  const need = () => goal.map((g,i)=>Math.max(0, g - real[i]));
-  const needSum = () => need().reduce((a,b)=>a+b,0);
+  // 不足配列を計算
+  function calcNeed() {
+    return goal.map((g, i) => Math.max(0, g - real[i]));
+  }
+
+  // 不足総量
+  function calcNeedSum(need) {
+    return need.reduce((a,b)=>a+b, 0);
+  }
 
   // =====================
   // フェーズ1：効率貪欲
   // =====================
   while (true) {
+    const need = calcNeed();
+
     let bestQuest = null;
     let bestScore = 0;
-
-    const n = need();
 
     for (const [name, add] of Object.entries(ORB_QUESTS)) {
       let score = 0;
       for (let i = 0; i < 7; i++) {
-        score += Math.min(n[i], add[i]);
+        score += Math.min(need[i], add[i]);
       }
       if (score > bestScore) {
         bestScore = score;
@@ -117,7 +132,7 @@ function solveOrbGreedy(start, goal) {
       }
     }
 
-    if (bestScore <= 0) break;
+    if (bestScore === 0) break;
 
     const add = ORB_QUESTS[bestQuest];
     for (let i = 0; i < 7; i++) real[i] += add[i];
@@ -125,18 +140,19 @@ function solveOrbGreedy(start, goal) {
   }
 
   // =====================
-  // フェーズ2：強制充填（重要）
+  // フェーズ2：強制充填（不足解消）
   // =====================
-  while (needSum() > 0) {
-    const n = need();
+  let need = calcNeed();
+  let needSum = calcNeedSum(need);
 
-    // 一番不足している軸
+  while (needSum > 0) {
+    // 最も不足している軸
     let idx = 0;
     for (let i = 1; i < 7; i++) {
-      if (n[i] > n[idx]) idx = i;
+      if (need[i] > need[idx]) idx = i;
     }
 
-    // その軸を含むクエストを選ぶ
+    // その軸を含むクエストを選択
     let chosen = null;
     for (const [name, add] of Object.entries(ORB_QUESTS)) {
       if (add[idx] > 0) {
@@ -148,11 +164,21 @@ function solveOrbGreedy(start, goal) {
     const add = ORB_QUESTS[chosen];
     for (let i = 0; i < 7; i++) real[i] += add[i];
     counts[chosen]++;
+
+    // ★ 再計算（超重要）
+    need = calcNeed();
+    needSum = calcNeedSum(need);
   }
 
+  // =====================
+  // 結果まとめ
+  // =====================
   const total = Object.values(counts).reduce((a,b)=>a+b,0);
-  const ORB_PER_QUEST = 4;
-  const lowerBound = Math.ceil(goal.reduce((a,b)=>a+b,0) / ORB_PER_QUEST);
+
+  const lowerBound = Math.ceil(
+    goal.reduce((s, g, i) => s + Math.max(0, g - start[i]), 0)
+    / ORB_PER_QUEST
+  );
 
   return {
     counts,
