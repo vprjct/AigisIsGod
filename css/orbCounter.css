@@ -28,6 +28,18 @@ input {
     padding-bottom: 36px;
 }
 
+.result-title {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.result-sub {
+  font-size: 0.8em;
+  font-weight: normal;
+  color: #666;
+  margin-left: 6px;
+}
+
 .action-btn {
   background-color: #4a90e2; /* 既存と同色 */
   width: 180px;

@@ -274,10 +274,11 @@ function calculateOrb() {
     for (const k of ORB_QUEST_UI_ORDER) {
         total += result.counts[k];
     }
+    let sta = 45 * total;
     let html = `
         <h2 class="result-title">
         必要クエスト回数
-        <span class="total-count">（合計 ${total}回）</span>
+        <span class="result-sub">（合計 ${total}回 / スタミナ ${sta}）</span>
         </h2>
         <ul>
     `;
