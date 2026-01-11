@@ -26,10 +26,27 @@ h2 { margin-top:2rem; font-size:1.2rem; color:#4a90e2; border-bottom:2px solid #
     z-index: -1;
 }
 
+.sub-nav {
+  text-align: center;
+  font-size: 0.9em;
+  margin: 8px 0 16px;
+}
+
+.sub-nav a {
+  margin: 0 8px;
+  color: #555;
+  text-decoration: none;
+}
+
+.sub-nav a.current {
+  font-weight: bold;
+  color: #000;
+  pointer-events: none;
+}
+
+
 .content {
     position: relative;
-    z-index: 1;          /* 前景コンテンツ */
-    padding: 2rem;
 }
 
 
